@@ -38,6 +38,125 @@
         footer{padding:44px 0;text-align:center;color:#72808d;border-top:1px solid var(--line);margin-top:60px}
         @media(max-width:900px){.hero-grid,.split,.gallery,.callout{grid-template-columns:1fr}.metrics,.grid{grid-template-columns:1fr 1fr}.hero-photo img{height:420px}.nav-links{display:none}}
         @media(max-width:600px){.metrics,.grid{grid-template-columns:1fr}.hero-photo img,.gallery-main img{height:320px}.gallery-stack img{height:220px}.callout{padding:28px}.shell{width:92vw}}
+    
+
+        /* ===== EXTRA PORTFOLIO EFFECTS: smooth, modern, lightweight ===== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary, var(--teal)), var(--gold), var(--blue, var(--teal-2)));
+            z-index: 20000;
+            box-shadow: 0 0 18px rgba(20, 184, 166, 0.42);
+            transition: width 0.08s linear;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 260px;
+            height: 260px;
+            left: 0;
+            top: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(20,184,166,.16), rgba(217,119,6,.09) 42%, transparent 70%);
+            mix-blend-mode: multiply;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity .25s ease;
+        }
+
+        .fx-orb {
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(18px);
+            opacity: .28;
+            z-index: -1;
+            animation: orbFloat 12s ease-in-out infinite alternate;
+        }
+        .fx-orb.one { left: -90px; top: 18%; background: rgba(20,184,166,.34); }
+        .fx-orb.two { right: -120px; top: 56%; background: rgba(217,119,6,.28); animation-delay: -4s; }
+
+        @keyframes orbFloat {
+            from { transform: translate3d(0,0,0) scale(1); }
+            to { transform: translate3d(38px,-34px,0) scale(1.14); }
+        }
+
+        .fx-reveal {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1);
+        }
+        .fx-reveal.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-text, .hero-card, .hero-photo, .section-head, .section-title {
+            animation: fxFadeUp .9s cubic-bezier(.2,.8,.2,1) both;
+        }
+        .hero-card, .hero-photo { animation-delay: .18s; }
+
+        @keyframes fxFadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card, .stat-box, .skill, .metric, .phase-box, .panel, .gallery-main, .gallery-stack img, .gallery-stack iframe {
+            will-change: transform;
+        }
+
+        .tilt-card {
+            transform-style: preserve-3d;
+        }
+
+        .card:hover, .stat-box:hover, .metric:hover, .skill:hover, .panel:hover {
+            box-shadow: 0 28px 70px rgba(15, 118, 110, 0.15), 0 12px 30px rgba(217, 119, 6, 0.10);
+        }
+
+        .activity-main-image::after, .hero-photo::after, .gallery-main::after, .gallery-stack::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.24) 45%, transparent 70%);
+            transform: translateX(-120%);
+            transition: transform .75s ease;
+            pointer-events: none;
+        }
+        .activity-main-image:hover::after, .hero-photo:hover::after, .gallery-main:hover::after, .gallery-stack:hover::after {
+            transform: translateX(120%);
+        }
+        .gallery-main, .gallery-stack { position: relative; overflow: hidden; border-radius: 28px; }
+
+        nav.nav-scrolled {
+            box-shadow: 0 16px 38px rgba(24, 32, 51, 0.10);
+            background: rgba(255,250,240,.92);
+        }
+
+        .btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,.26), transparent);
+            transform: translateX(-120%);
+            transition: transform .55s ease;
+        }
+        .btn { position: relative; overflow: hidden; }
+        .btn:hover::before { transform: translateX(120%); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+            .fx-reveal { opacity: 1 !important; transform: none !important; }
+            .cursor-glow, .fx-orb { display: none !important; }
+        }
+
     </style>
 </head>
 <body>
@@ -212,5 +331,79 @@
     <footer>
         © 2026 Nguyễn Đỗ Anh Dũng · AI Search & Rescue UAV Case Study
     </footer>
+<script>
+
+        // ===== EXTRA PORTFOLIO EFFECTS =====
+        (function () {
+            const body = document.body;
+            if (!document.querySelector('.scroll-progress')) {
+                const progress = document.createElement('div');
+                progress.className = 'scroll-progress';
+                body.prepend(progress);
+            }
+            if (!document.querySelector('.cursor-glow')) {
+                const glow = document.createElement('div');
+                glow.className = 'cursor-glow';
+                body.appendChild(glow);
+                window.addEventListener('mousemove', (e) => {
+                    glow.style.opacity = '1';
+                    glow.style.left = e.clientX + 'px';
+                    glow.style.top = e.clientY + 'px';
+                }, { passive: true });
+                window.addEventListener('mouseleave', () => glow.style.opacity = '0');
+            }
+            if (!document.querySelector('.fx-orb')) {
+                const orb1 = document.createElement('div');
+                const orb2 = document.createElement('div');
+                orb1.className = 'fx-orb one';
+                orb2.className = 'fx-orb two';
+                body.appendChild(orb1);
+                body.appendChild(orb2);
+            }
+
+            const revealTargets = document.querySelectorAll('.card, .stat-box, .skill, .metric, .phase, .panel, .timeline, table, .gallery-main, .gallery-stack, .contact, .callout');
+            revealTargets.forEach((el, i) => {
+                el.classList.add('fx-reveal');
+                el.style.transitionDelay = Math.min((i % 6) * 0.07, 0.35) + 's';
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            revealTargets.forEach(el => observer.observe(el));
+
+            const nav = document.querySelector('nav');
+            const progress = document.querySelector('.scroll-progress');
+            function onScroll() {
+                const h = document.documentElement;
+                const max = h.scrollHeight - h.clientHeight;
+                const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+                if (progress) progress.style.width = pct + '%';
+                if (nav) nav.classList.toggle('nav-scrolled', window.scrollY > 40);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            const tiltTargets = document.querySelectorAll('.card, .hero-card, .hero-photo, .gallery-main, .gallery-stack img, .gallery-stack iframe');
+            tiltTargets.forEach(el => {
+                el.classList.add('tilt-card');
+                el.addEventListener('mousemove', (e) => {
+                    const r = el.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width - 0.5;
+                    const y = (e.clientY - r.top) / r.height - 0.5;
+                    el.style.transform = `perspective(900px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 4).toFixed(2)}deg) translateY(-4px)`;
+                });
+                el.addEventListener('mouseleave', () => {
+                    el.style.transform = '';
+                });
+            });
+        })();
+
+    </script>
 </body>
 </html>
