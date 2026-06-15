@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Đỗ Anh Dũng | Robotics & Applied Physics Portfolio</title>
+    <meta name="description" content="Portfolio of Nguyễn Đỗ Anh Dũng – HSGS VNU student, WICO 2025 Gold Medalist, Robotics & Applied Physics enthusiast.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #f7f3ea;
+            --bg-soft: #fffaf0;
+            --paper: #ffffff;
+            --paper-2: #fbf7ee;
+            --text: #182033;
+            --muted: #697386;
+            --subtle: #8a94a6;
+            --primary: #0f766e;
+            --primary-2: #14b8a6;
+            --blue: #2563eb;
+            --gold: #d97706;
+            --line: rgba(24, 32, 51, 0.10);
+            --shadow: 0 18px 55px rgba(24, 32, 51, 0.10);
+            --shadow-soft: 0 10px 30px rgba(24, 32, 51, 0.08);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 12%, rgba(20, 184, 166, 0.18), transparent 32%),
+                radial-gradient(circle at 88% 18%, rgba(217, 119, 6, 0.16), transparent 30%),
+                radial-gradient(circle at 55% 82%, rgba(37, 99, 235, 0.11), transparent 38%),
+                linear-gradient(135deg, #f7f3ea 0%, #fffaf0 46%, #eef7f5 100%);
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(24, 32, 51, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(24, 32, 51, 0.035) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 250, 240, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+            z-index: 999;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.8px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover { color: var(--text); }
+        nav a:hover::after { width: 100%; }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 8% 80px 8%;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 64px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text h3 {
+            color: var(--primary);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.6px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .hero-text h1 {
+            font-size: 66px;
+            font-weight: 800;
+            line-height: 1.05;
+            margin-bottom: 26px;
+            color: var(--text);
+            letter-spacing: -2.4px;
+        }
+
+        .hero-text p {
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.85;
+            margin-bottom: 36px;
+            max-width: 780px;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 800;
+            background: linear-gradient(120deg, rgba(20, 184, 166, 0.18), rgba(217, 119, 6, 0.16));
+            padding: 2px 6px;
+            border-radius: 8px;
+        }
+
+        .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 800;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            color: #ffffff;
+            box-shadow: 0 12px 26px rgba(15, 118, 110, 0.24);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 34px rgba(15, 118, 110, 0.30);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(15, 118, 110, 0.22);
+            color: var(--primary);
+            background: rgba(255, 255, 255, 0.72);
+            box-shadow: 0 8px 24px rgba(24, 32, 51, 0.06);
+        }
+
+        .btn-outline:hover {
+            background: #ffffff;
+            color: var(--text);
+            border-color: rgba(217, 119, 6, 0.38);
+            transform: translateY(-2px);
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(24, 32, 51, 0.08);
+            border-radius: 32px;
+            padding: 28px;
+            backdrop-filter: blur(12px);
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.12), transparent 42%, rgba(217, 119, 6, 0.12));
+            pointer-events: none;
+        }
+
+        .hero-card > * { position: relative; }
+
+        .hero-card img {
+            width: 148px;
+            height: 148px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 22px auto;
+            border: 5px solid #ffffff;
+            outline: 2px solid rgba(15, 118, 110, 0.24);
+            display: block;
+            box-shadow: 0 14px 35px rgba(24, 32, 51, 0.16);
+        }
+
+        .hero-card h4 { font-size: 21px; margin-bottom: 7px; color: var(--text); }
+
+        .hero-card .tag {
+            font-size: 13px;
+            color: var(--primary);
+            margin-bottom: 22px;
+            display: inline-block;
+            background: rgba(20, 184, 166, 0.10);
+            border: 1px solid rgba(15, 118, 110, 0.14);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 800;
+        }
+
+        .info { display: grid; gap: 12px; text-align: left; }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid rgba(24, 32, 51, 0.08);
+            padding-bottom: 9px;
+            font-size: 14px;
+        }
+
+        .info-item span:first-child { color: var(--subtle); }
+        .info-item span:last-child { color: var(--text); font-weight: 700; text-align: right; }
+
+        section { padding: 92px 8%; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 58px;
+        }
+
+        .section-title h2 {
+            font-size: 43px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text);
+            letter-spacing: -1.2px;
+        }
+
+        .section-title h2::after {
+            content: "";
+            display: block;
+            width: 72px;
+            height: 4px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            margin: 16px auto 0;
+        }
+
+        .section-title p { color: var(--muted); font-size: 16px; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 42px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(24, 32, 51, 0.08);
+            border-radius: 22px;
+            padding: 24px 18px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .stat-value {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-box:nth-child(1) .stat-value { color: var(--primary); }
+        .stat-box:nth-child(2) .stat-value { color: var(--blue); }
+        .stat-box:nth-child(3) .stat-value { color: var(--gold); }
+        .stat-box:nth-child(4) .stat-value { color: #7c3aed; }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            font-weight: 800;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid rgba(24, 32, 51, 0.08);
+            border-radius: 26px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 12px 34px rgba(24, 32, 51, 0.075);
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(15, 118, 110, 0.22);
+            box-shadow: 0 22px 50px rgba(24, 32, 51, 0.12);
+            background: #ffffff;
+        }
+
+        .activity-main-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #e9ecef;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .activity-main-image img, .activity-main-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .activity-main-image img:hover { transform: scale(1.035); }
+
+        .gallery-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(8px);
+            color: var(--text);
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            box-shadow: 0 10px 28px rgba(24, 32, 51, 0.14);
+        }
+
+        .gallery-btn:hover { background: var(--primary); color: #ffffff; }
+        .gallery-btn.left { left: 15px; }
+        .gallery-btn.right { right: 15px; }
+
+        .activity-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .activity-text { margin-bottom: 16px; }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 13px;
+            background: rgba(217, 119, 6, 0.10);
+            color: #9a5604;
+            border: 1px solid rgba(217, 119, 6, 0.18);
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .activity-content h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text);
+            line-height: 1.32;
+        }
+
+        .activity-content p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.68;
+        }
+
+        .open-gallery-btn {
+            margin-top: auto;
+            padding: 10px 18px;
+            border: 1px solid rgba(15, 118, 110, 0.18);
+            border-radius: 999px;
+            background: rgba(20, 184, 166, 0.08);
+            color: var(--primary);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            align-self: flex-start;
+        }
+
+        .open-gallery-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .thumbnail-gallery {
+            display: none;
+            padding: 0 24px 24px 24px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .thumbnail-gallery.active { display: flex; }
+
+        .thumbnail-gallery img {
+            width: 62px;
+            height: 46px;
+            object-fit: cover;
+            border-radius: 9px;
+            cursor: pointer;
+            opacity: 0.58;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail-gallery img:hover, .thumbnail-gallery img.active-thumb {
+            opacity: 1;
+            border-color: var(--primary);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+            justify-content: center;
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .skill {
+            padding: 11px 20px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(24, 32, 51, 0.08);
+            border-radius: 999px;
+            font-size: 14px;
+            color: var(--text);
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(24, 32, 51, 0.055);
+        }
+
+        .skill:hover {
+            background: rgba(20, 184, 166, 0.10);
+            border-color: rgba(15, 118, 110, 0.26);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .contact {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(238, 247, 245, 0.92));
+            border: 1px solid rgba(24, 32, 51, 0.08);
+            border-radius: 32px;
+            padding: 54px;
+            max-width: 760px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+
+        .contact h2 { font-size: 37px; margin-bottom: 15px; color: var(--text); }
+        .contact p { color: var(--muted); margin-bottom: 26px; }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 24, 39, 0.88);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox-content {
+            max-width: 85vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 16px 65px rgba(0,0,0,0.55);
+            animation: zoomIn 0.25s ease;
+            background: #ffffff;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            color: rgba(255,255,255,0.78);
+            font-size: 35px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .lightbox-close:hover { color: #ffffff; }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .lightbox-arrow:hover { background: var(--primary); scale: 1.05; }
+        .lightbox-arrow.left { left: 40px; }
+        .lightbox-arrow.right { right: 40px; }
+
+        footer {
+            padding: 60px 8% 40px 8%;
+            text-align: center;
+            border-top: 1px solid var(--line);
+            background: linear-gradient(to bottom, transparent, rgba(20, 184, 166, 0.08));
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-copyright { color: var(--muted); font-size: 14px; }
+
+        .footer-links { display: flex; gap: 20px; margin-top: 10px; }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover { color: var(--primary); }
+
+        .hidden-project { display: none !important; }
+        .hidden-project.show { display: flex !important; animation: fadeIn 0.5s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .show-more-container { text-align: center; margin-top: 40px; width: 100%; }
+
+        @media(max-width: 968px) {
+            nav { padding: 16px 5%; }
+            nav ul { gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+            nav a { font-size: 13px; }
+            .hero { padding: 125px 6% 70px; }
+            section { padding: 78px 6%; }
+            .hero-container { grid-template-columns: 1fr; gap: 42px; text-align: center; }
+            .hero-text h1 { font-size: 46px; }
+            .hero-text p { font-size: 16px; }
+            .hero-btns { justify-content: center; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .section-title h2 { font-size: 34px; }
+            .lightbox-arrow { width: 45px; height: 45px; font-size: 16px; }
+            .lightbox-arrow.left { left: 15px; }
+            .lightbox-arrow.right { right: 15px; }
+        }
+
+        @media(max-width: 560px) {
+            .logo { font-size: 22px; }
+            nav { align-items: flex-start; gap: 12px; }
+            nav ul { max-width: 240px; }
+            .hero-text h1 { font-size: 38px; }
+            .grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .contact { padding: 36px 22px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">NDAD.</div>
+        <ul>
+            <li><a href="#about">Academic Profile</a></li>
+            <li><a href="#awards">Awards &amp; Honors</a></li>
+            <li><a href="#project">Personal Project</a></li>
+            <li><a href="#skills">Technical Skills</a></li>
+            <li><a href="#activities">Activities</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h3>Robotics &amp; Mechanical Engineer • Applied Physics</h3>
+                <h1>Nguyễn Đỗ Anh Dũng</h1>
+                <p>
+                    Student at <span class="highlight">High School for Gifted Sciences (HSGS), VNU</span> pursuing Physics &amp; Robotics. His portfolio connects academic strength with hands-on engineering: from theoretical mechanics and programming foundations to real prototyping, UAV assembly, camera integration and servo-based payload release. The goal is to present a learner who does not only collect certificates, but also turns technical curiosity into working systems.
+                </p>
+                <div class="hero-btns">
+                    <a href="#awards" class="btn btn-primary">View Portfolio</a>
+                    <a href="mailto:nguyendoanhdung@gmail.com" class="btn btn-outline">Contact</a>
+                </div>
+            </div>
+
+            <div class="hero-card">
+                <img src="assets/transcripts/transcript1.jpg" alt="Nguyễn Đỗ Anh Dũng">
+                <h4>Nguyễn Đỗ Anh Dũng</h4>
+                <span class="tag">Future Engineer</span>
+                <div class="info">
+                    <div class="info-item"><span>School</span><span>HSGS, VNU</span></div>
+                    <div class="info-item"><span>Class</span><span>11A3 (Physics Major)</span></div>
+                    <div class="info-item"><span>Major</span><span>Robotics &amp; Mechanical Eng.</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT / ACADEMIC PROFILE -->
+    <section id="about">
+        <div class="section-title">
+            <h2>Academic Profile</h2>
+            <p>Research, Engineering and Applied Physics Passion</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box"><div class="stat-value">9.5</div><div class="stat-label">Current GPA</div></div>
+            <div class="stat-box"><div class="stat-value">1500</div><div class="stat-label">SAT Score</div></div>
+            <div class="stat-box"><div class="stat-value">8.0</div><div class="stat-label">IELTS Band</div></div>
+            <div class="stat-box"><div class="stat-value">Physics</div><div class="stat-label">Major Track</div></div>
+        </div>
+
+        <div class="grid" style="margin-bottom: 50px;">
+            <div class="card">
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <h3>Academic Excellence</h3>
+                        <p>Strong background in Mathematics, Physics and Computer Science with sustained top-tier academic results across semesters at High School for Gifted Sciences (HSGS).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <h3>Robotics &amp; UAVs Research</h3>
+                        <p>Focused on high-precision mechanical designs, robotic arm kinematics, and customized AI search &amp; rescue drones featuring FPV telemetry and automatic mechanisms.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <h3>Future Aspirations</h3>
+                        <p>Dedicated to studying abroad in Singapore (NUS, NTU) and the United States, specializing in Robotics Engineering and Applied Physics systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 25px; text-align: center; color: var(--text);">Verified Academic Credentials</h3>
+        <div class="grid">
+            <!-- Card: Transcripts -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img id="transcriptImg" src="assets/transcripts/transcript1.jpg" onclick="openLightbox('transcript', transcriptIndex)" alt="Transcript">
+                    <button class="gallery-btn left" onclick="prevTranscript(event)">❮</button>
+                    <button class="gallery-btn right" onclick="nextTranscript(event)">❯</button>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Transcript</div>
+                        <h3>High School Transcripts</h3>
+                        <p>Official school transcripts covering Grades 9, 10, and 11, reflecting outstanding GPA performance across semesters in natural sciences and math.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('transcriptGallery')">View Transcripts</button>
+                </div>
+                <div class="thumbnail-gallery" id="transcriptGallery">
+                    <img onclick="setTranscript(0)" src="assets/transcripts/transcript1.jpg" alt="Transcript 1">
+                    <img onclick="setTranscript(1)" src="assets/transcripts/transcript2.jpg" alt="Transcript 2">
+                </div>
+            </div>
+
+            <!-- Card: SAT & IELTS -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img id="stdImg" src="assets/certs/ielts_sat.jpg" onclick="openLightbox('standardized', standardizedIndex)" alt="SAT & IELTS Certificate">
+                    <button class="gallery-btn left" onclick="prevStandardized(event)">❮</button>
+                    <button class="gallery-btn right" onclick="nextStandardized(event)">❯</button>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Scores</div>
+                        <h3>SAT &amp; IELTS Certificates</h3>
+                        <p>Certified scores including SAT 1500 (top 1% internationally) and IELTS Academic 8.0 confirming strong analytical and global communication proficiency.</p>
+                    </div>
+                    <a href="assets/certs/sat_score.pdf" target="_blank" class="open-gallery-btn" style="text-decoration: none; margin-top: auto; display: inline-block;">Open Official SAT PDF</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section id="awards">
+        <div class="section-title">
+            <h2>Awards &amp; Honors</h2>
+            <p>International Innovations &amp; Olympiads</p>
+        </div>
+
+        <div class="grid">
+            <!-- WICO Gold -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img id="wicoImage" src="assets/awards/wico/wico.jpg" onclick="openLightbox('wico', wicoIndex)" alt="WICO Gold Medal">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">2025</div>
+                        <h3>WICO 2025 Gold Medal</h3>
+                        <p>World Invention Creativity Olympic in Seoul, South Korea. Awarded for developing a custom assistive robotic arm solution designed for individuals with physiological motor disabilities.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('wicoGallery')">View Certificate</button>
+                </div>
+                <div class="thumbnail-gallery" id="wicoGallery">
+                    <img onclick="setWico(0)" src="assets/awards/wico/wico.jpg" alt="WICO Certificate">
+                </div>
+            </div>
+
+            <!-- Physics Prize -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img id="physicsImage" src="assets/awards/physics/physics1.jpg" onclick="openLightbox('physics', physicsIndex)" alt="Physics Prize">
+                    <button class="gallery-btn left" onclick="prevPhysics(event)">❮</button>
+                    <button class="gallery-btn right" onclick="nextPhysics(event)">❯</button>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">2024</div>
+                        <h3>District 1st Prize &amp; City 2nd Prize Physics</h3>
+                        <p>Honored for academic excellence and problem-solving mastery in physics competitions, including Grade 9 Olympiads.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('physicsGallery')">View Certificates</button>
+                </div>
+                <div class="thumbnail-gallery" id="physicsGallery">
+                    <img onclick="setPhysics(0)" src="assets/awards/physics/physics1.jpg" alt="City 2nd Prize">
+                    <img onclick="setPhysics(1)" src="assets/awards/physics/physics2.jpg" alt="District 1st Prize">
+                </div>
+            </div>
+
+            <!-- Physics Olympiad -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img id="olympiadImage" src="assets/awards/olympiad/olympiad.jpg" onclick="openLightbox('olympiad', olympiadIndex)" alt="Physics Olympiad 2025">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">2025</div>
+                        <h3>High School Physics Olympiad</h3>
+                        <p>Outstanding performance rating at the 2025 High School Physics Olympiad competition, proving deep command over advanced mechanics and theoretical physics.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('olympiadGallery')">View Certificate</button>
+                </div>
+                <div class="thumbnail-gallery" id="olympiadGallery">
+                    <img onclick="setOlympiad(0)" src="assets/awards/olympiad/olympiad.jpg" alt="Physics Olympiad">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT -->
+    <section id="project">
+        <div class="section-title">
+            <h2>Personal Project</h2>
+            <p>AI Search &amp; Rescue UAV System Engineering Phases</p>
+        </div>
+
+        <div class="grid">
+            <!-- Phase 1: Circuit -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/drone/control/servo-arduino.webp" onclick="openLightbox('projConcept', 0)" alt="Arduino Circuit Design">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Phase 1: Circuit Design</div>
+                        <h3>Arduino Schematic Design</h3>
+                        <p>Researched aerodynamics thrust-to-weight ratios and drafted circuit diagrams mapping PWM Arduino microcontroller logic for double-servo releases.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: Assembly -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img id="assemblyImage" src="assets/drone/assembly/assembly1.jpg" onclick="openLightbox('projAssembly', projAssemblyIndex)" alt="Drone Assembly">
+                    <button class="gallery-btn left" onclick="prevProjAssembly(event)">❮</button>
+                    <button class="gallery-btn right" onclick="nextProjAssembly(event)">❯</button>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Phase 2: Build</div>
+                        <h3>Chassis Frame Assembly</h3>
+                        <p>Fabricated high-strength, lightweight carbon fiber F450 frame chassis, installing brushless DC motors, ESCs, and calibrated rotors.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('assemblyGallery')">View Build Process</button>
+                </div>
+                <div class="thumbnail-gallery" id="assemblyGallery">
+                    <img onclick="setProjAssembly(0)" src="assets/drone/assembly/assembly1.jpg" alt="Assembly 1">
+                    <img onclick="setProjAssembly(1)" src="assets/drone/assembly/assembly2.jpg" alt="Assembly 2">
+                    <img onclick="setProjAssembly(2)" src="assets/drone/assembly/assembly3.jpg" alt="Assembly 3">
+                </div>
+            </div>
+
+            <!-- Phase 3: Camera -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/drone/control/camera.avif" onclick="openLightbox('projCamera', 0)" alt="AI Camera Module">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Phase 3: Telemetry</div>
+                        <h3>AI Person Detection Camera</h3>
+                        <p>Mounted a high-definition night vision USB FPV camera module to stream real-time video, enabling custom onboard logic to detect survivors.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 4: Testing (hidden) -->
+            <div class="card hidden-project">
+                <div class="activity-main-image" id="projTestingMedia"></div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Phase 4: Testing</div>
+                        <h3>Flight and Payload Drop Tests</h3>
+                        <p>Executed extensive calibration test flights. Successfully verified automatic dual-servo mechanical drop latch mechanism to deploy lifebuoys on RF command.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('testingGallery')">View Videos</button>
+                </div>
+                <div class="thumbnail-gallery" id="testingGallery">
+                    <img onclick="setProjTesting(0)" src="assets/drone/assembly/assembly1.jpg" alt="Test Video 1">
+                    <img onclick="setProjTesting(1)" src="assets/drone/assembly/assembly2.jpg" alt="Test Video 2">
+                    <img onclick="setProjTesting(2)" src="assets/drone/assembly/assembly3.jpg" alt="Test Video 3">
+                </div>
+            </div>
+
+            <!-- Phase 5: Presentation (hidden) -->
+            <div class="card hidden-project">
+                <div class="activity-main-image" id="projPresentationMedia"></div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Phase 5: Presentation</div>
+                        <h3>UAV Project Pitch &amp; Showcase</h3>
+                        <p>Developed and delivered engineering presentations outlining drone capability, technical architecture, testing workflow, and humanitarian rescue impacts.</p>
+                    </div>
+                    <button class="open-gallery-btn" onclick="toggleGallery('presGallery')">View Videos</button>
+                </div>
+                <div class="thumbnail-gallery" id="presGallery">
+                    <img onclick="setProjPresentation(0)" src="assets/drone/assembly/assembly2.jpg" alt="Presentation Video 1">
+                    <img onclick="setProjPresentation(1)" src="assets/drone/assembly/assembly3.jpg" alt="Presentation Video 2">
+                </div>
+            </div>
+        </div>
+
+        <div class="show-more-container">
+            <button id="showMoreProjectsBtn" class="btn btn-outline" onclick="toggleProjects()">Learn More</button>
+            <a href="project-detail.html" class="btn btn-primary" style="margin-left:12px; display:inline-block;">Full Project Case Study</a>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-title">
+            <h2>Technical Skills</h2>
+            <p>Engineering Tools &amp; Scientific Domains</p>
+        </div>
+        <div class="skills">
+            <div class="skill">Robotics Design &amp; CAD</div>
+            <div class="skill">Applied Physics &amp; Telemetry</div>
+            <div class="skill">Embedded Systems &amp; Arduino</div>
+            <div class="skill">UAV Structural Assembly</div>
+            <div class="skill">Precision Mechanical Kinematics</div>
+            <div class="skill">C++ &amp; Python programming</div>
+            <div class="skill">AI Computer Vision</div>
+        </div>
+    </section>
+
+    <!-- ACTIVITIES -->
+    <section id="activities">
+        <div class="section-title">
+            <h2>Activities &amp; Community</h2>
+            <p>Volunteer Work, Social Leadership &amp; International Exchange</p>
+        </div>
+
+        <div class="grid">
+            <!-- Warm Winter -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/muadongam.jpg" onclick="openLightbox('muadongam', 0)" alt="Warm Winter Campaign">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Volunteer</div>
+                        <h3>Warm Winter Campaign 2025</h3>
+                        <p>Led fundraising and materials logistics, driving localized donation campaigns to secure warm clothes and blankets for mountain children.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOS Village -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/sos.jpg" onclick="openLightbox('sos', 0)" alt="SOS Children Village">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Social Union</div>
+                        <h3>SOS Children's Village Volunteer</h3>
+                        <p>Mentored and organized weekend educational programs and academic support sessions for children residing at the SOS village.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Son La -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/sonla.jpg" onclick="openLightbox('tnsonla', 0)" alt="Son La Philanthropy">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Volunteer</div>
+                        <h3>Son La Preschool Philanthropy</h3>
+                        <p>Coordinated construction logistics and material transport to build new preschool classroom structures in Chieng Noi, Son La province.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ASDC Certificate -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/certificate.jpg" onclick="openLightbox('certificate', 0)" alt="ASDC Certificate">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Leadership</div>
+                        <h3>Vietnam ASDC Debate Organizing Certificate</h3>
+                        <p>Officially commended as an organizing secretariat volunteer for the 2025 Asian Schools Debating Championship (ASDC).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Debate -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/debate.jpg" onclick="openLightbox('debate', 0)" alt="ASDC Debate">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Debate</div>
+                        <h3>ASDC Championship Tournament</h3>
+                        <p>Participated in high-level intellectual debate rounds alongside teams from schools across the Asian region, defending strategic topics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exchange Program -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/exchange.jpg" onclick="openLightbox('exchange', 0)" alt="Singapore Exchange">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Exchange</div>
+                        <h3>Singapore-Vietnam Exchange Program</h3>
+                        <p>Represented Vietnam as a selected student delegate visiting Singapore academic departments, building global scientific networks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Club Content Member -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/member.jpg" onclick="openLightbox('member_conten', 0)" alt="Physics Club Content Member">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Club Member</div>
+                        <h3>HSGS Applied Physics Club Content Creator</h3>
+                        <p>Researched and wrote articles for the Hanoi Applied Astronomy &amp; Physics club to share scientific concepts across the VNU campus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Volunteer Debate -->
+            <div class="card">
+                <div class="activity-main-image">
+                    <img src="assets/activities/volunteer_debate.jpg" onclick="openLightbox('volunteer_debate', 0)" alt="ASDC Logistics Officer">
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">
+                        <div class="badge">Debate</div>
+                        <h3>ASDC Logistics Officer</h3>
+                        <p>Successfully managed room coordination, timing schedules, and judge distribution structures throughout the ASDC championship rounds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section>
+        <div class="contact">
+            <h2>Connect With Me</h2>
+            <p>Open to research collaborations, academic inquiries, and engineering opportunities.</p>
+            <a href="mailto:nguyendoanhdung@gmail.com" class="btn btn-primary">nguyendoanhdung@gmail.com</a>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-arrow left" onclick="lightboxPrev(event)">❮</button>
+        <img class="lightbox-content" id="lightboxImg" src="" onclick="event.stopPropagation()" alt="">
+        <button class="lightbox-arrow right" onclick="lightboxNext(event)">❯</button>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="font-size: 20px; margin-bottom: 5px;">NDAD.</div>
+            <div class="footer-copyright">
+                &copy; 2026 Nguyễn Đỗ Anh Dũng. Built with passion &amp; technology.
+            </div>
+            <div class="footer-links">
+                <a href="#about">Academic</a>
+                <a href="#awards">Awards</a>
+                <a href="#project">Project</a>
+                <a href="#skills">Skills</a>
+                <a href="mailto:nguyendoanhdung@gmail.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== IMAGE / VIDEO DATA ARRAYS (đường dẫn đơn giản, không có ký tự đặc biệt) =====
+
+        const transcript = [
+            'assets/transcripts/transcript1.jpg',
+            'assets/transcripts/transcript2.jpg'
+        ];
+
+        const standardized = [
+            'assets/certs/ielts_sat.jpg'
+        ];
+
+        const wico = [
+            'assets/awards/wico/wico.jpg'
+        ];
+
+        const physics = [
+            'assets/awards/physics/physics1.jpg',
+            'assets/awards/physics/physics2.jpg'
+        ];
+
+        const olympiad = [
+            'assets/awards/olympiad/olympiad.jpg'
+        ];
+
+        const projAssembly = [
+            'assets/drone/assembly/assembly1.jpg',
+            'assets/drone/assembly/assembly2.jpg',
+            'assets/drone/assembly/assembly3.jpg'
+        ];
+
+        const projTesting = [
+            { type: "video", src: "assets/drone/test/test1.mp4" },
+            { type: "video", src: "assets/drone/test/test2.mp4" },
+            { type: "video", src: "assets/drone/test/test3.mp4" }
+        ];
+
+        const projPresentation = [
+            { type: "video", src: "assets/drone/presentation/pres1.mp4" },
+            { type: "video", src: "assets/drone/presentation/pres2.mp4" }
+        ];
+
+        const muadongam = [ 'assets/activities/muadongam.jpg' ];
+        const sos = [ 'assets/activities/sos.jpg' ];
+        const tnsonla = [ 'assets/activities/sonla.jpg' ];
+        const certificate = [ 'assets/activities/certificate.jpg' ];
+        const debate = [ 'assets/activities/debate.jpg' ];
+        const exchange = [ 'assets/activities/exchange.jpg' ];
+        const member_conten = [ 'assets/activities/member.jpg' ];
+        const volunteer_debate = [ 'assets/activities/volunteer_debate.jpg' ];
+
+        // ===== STATE VARIABLES =====
+        let transcriptIndex = 0;
+        let standardizedIndex = 0;
+        let wicoIndex = 0;
+        let physicsIndex = 0;
+        let olympiadIndex = 0;
+        let projAssemblyIndex = 0;
+        let projTestingIndex = 0;
+        let projPresentationIndex = 0;
+
+        let currentLightboxGallery = [];
+        let currentLightboxIndex = 0;
+
+        // ===== TOGGLE THUMBNAIL GALLERY =====
+        function toggleGallery(id) {
+            document.getElementById(id).classList.toggle("active");
+        }
+
+        // ===== TRANSCRIPTS =====
+        function setTranscript(i) {
+            transcriptIndex = i;
+            document.getElementById("transcriptImg").src = transcript[i];
+        }
+        function nextTranscript(e) {
+            e.stopPropagation();
+            transcriptIndex = (transcriptIndex + 1) % transcript.length;
+            setTranscript(transcriptIndex);
+        }
+        function prevTranscript(e) {
+            e.stopPropagation();
+            transcriptIndex = (transcriptIndex - 1 + transcript.length) % transcript.length;
+            setTranscript(transcriptIndex);
+        }
+
+        // ===== STANDARDIZED =====
+        function setStandardized(i) {
+            standardizedIndex = i;
+            document.getElementById("stdImg").src = standardized[i];
+        }
+        function nextStandardized(e) {
+            e.stopPropagation();
+            standardizedIndex = (standardizedIndex + 1) % standardized.length;
+            setStandardized(standardizedIndex);
+        }
+        function prevStandardized(e) {
+            e.stopPropagation();
+            standardizedIndex = (standardizedIndex - 1 + standardized.length) % standardized.length;
+            setStandardized(standardizedIndex);
+        }
+
+        // ===== WICO =====
+        function setWico(i) {
+            wicoIndex = i;
+            document.getElementById("wicoImage").src = wico[i];
+        }
+
+        // ===== PHYSICS =====
+        function setPhysics(i) {
+            physicsIndex = i;
+            document.getElementById("physicsImage").src = physics[i];
+        }
+        function nextPhysics(e) {
+            e.stopPropagation();
+            physicsIndex = (physicsIndex + 1) % physics.length;
+            setPhysics(physicsIndex);
+        }
+        function prevPhysics(e) {
+            e.stopPropagation();
+            physicsIndex = (physicsIndex - 1 + physics.length) % physics.length;
+            setPhysics(physicsIndex);
+        }
+
+        // ===== OLYMPIAD =====
+        function setOlympiad(i) {
+            olympiadIndex = i;
+            document.getElementById("olympiadImage").src = olympiad[i];
+        }
+
+        // ===== DRONE BUILD ASSEMBLY =====
+        function setProjAssembly(i) {
+            projAssemblyIndex = i;
+            document.getElementById("assemblyImage").src = projAssembly[i];
+        }
+        function nextProjAssembly(e) {
+            e.stopPropagation();
+            projAssemblyIndex = (projAssemblyIndex + 1) % projAssembly.length;
+            setProjAssembly(projAssemblyIndex);
+        }
+        function prevProjAssembly(e) {
+            e.stopPropagation();
+            projAssemblyIndex = (projAssemblyIndex - 1 + projAssembly.length) % projAssembly.length;
+            setProjAssembly(projAssemblyIndex);
+        }
+
+        // ===== DRONE TEST VIDEOS =====
+        function renderProjTesting() {
+            const media = document.getElementById("projTestingMedia");
+            const controls = `
+                <button class="gallery-btn left" onclick="prevProjTesting(event)">❮</button>
+                <button class="gallery-btn right" onclick="nextProjTesting(event)">❯</button>
+            `;
+            media.innerHTML = controls + `
+                <video src="${projTesting[projTestingIndex].src}#t=0.1" style="width:100%; height:100%; object-fit:cover;" controls preload="metadata"></video>
+            `;
+        }
+        function nextProjTesting(e) {
+            e.stopPropagation();
+            projTestingIndex = (projTestingIndex + 1) % projTesting.length;
+            renderProjTesting();
+        }
+        function prevProjTesting(e) {
+            e.stopPropagation();
+            projTestingIndex = (projTestingIndex - 1 + projTesting.length) % projTesting.length;
+            renderProjTesting();
+        }
+        function setProjTesting(i) {
+            projTestingIndex = i;
+            renderProjTesting();
+        }
+
+        // ===== DRONE PRESENTATION VIDEOS =====
+        function renderProjPresentation() {
+            const media = document.getElementById("projPresentationMedia");
+            const controls = `
+                <button class="gallery-btn left" onclick="prevProjPresentation(event)">❮</button>
+                <button class="gallery-btn right" onclick="nextProjPresentation(event)">❯</button>
+            `;
+            media.innerHTML = controls + `
+                <video src="${projPresentation[projPresentationIndex].src}#t=0.1" style="width:100%; height:100%; object-fit:cover;" controls preload="metadata"></video>
+            `;
+        }
+        function nextProjPresentation(e) {
+            e.stopPropagation();
+            projPresentationIndex = (projPresentationIndex + 1) % projPresentation.length;
+            renderProjPresentation();
+        }
+        function prevProjPresentation(e) {
+            e.stopPropagation();
+            projPresentationIndex = (projPresentationIndex - 1 + projPresentation.length) % projPresentation.length;
+            renderProjPresentation();
+        }
+        function setProjPresentation(i) {
+            projPresentationIndex = i;
+            renderProjPresentation();
+        }
+
+        // KHỞI TẠO VIDEO CAROUSELS
+        renderProjTesting();
+        renderProjPresentation();
+
+        // ===== TOGGLE HIDDEN PROJECTS =====
+        function toggleProjects() {
+            const hiddenProjects = document.querySelectorAll('.hidden-project');
+            const btn = document.getElementById('showMoreProjectsBtn');
+            let isShowing = false;
+
+            hiddenProjects.forEach(card => {
+                card.classList.toggle('show');
+                if (card.classList.contains('show')) {
+                    isShowing = true;
+                }
+            });
+
+            if (isShowing) {
+                btn.innerText = 'Show less';
+            } else {
+                btn.innerText = 'Learn more';
+                document.getElementById('project').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ===== LIGHTBOX =====
+        function openLightbox(galleryType, index) {
+            let srcList = [];
+
+            if (galleryType === 'transcript') srcList = [...transcript];
+            else if (galleryType === 'standardized') srcList = [...standardized];
+            else if (galleryType === 'wico') srcList = [...wico];
+            else if (galleryType === 'physics') srcList = [...physics];
+            else if (galleryType === 'olympiad') srcList = [...olympiad];
+            else if (galleryType === 'projAssembly') srcList = [...projAssembly];
+            else if (galleryType === 'projConcept') srcList = ['assets/drone/control/servo-arduino.webp'];
+            else if (galleryType === 'projCamera') srcList = ['assets/drone/control/camera.avif'];
+            else if (galleryType === 'muadongam') srcList = [...muadongam];
+            else if (galleryType === 'sos') srcList = [...sos];
+            else if (galleryType === 'tnsonla') srcList = [...tnsonla];
+            else if (galleryType === 'certificate') srcList = [...certificate];
+            else if (galleryType === 'debate') srcList = [...debate];
+            else if (galleryType === 'exchange') srcList = [...exchange];
+            else if (galleryType === 'member_conten') srcList = [...member_conten];
+            else if (galleryType === 'volunteer_debate') srcList = [...volunteer_debate];
+
+            if (srcList.length === 0) return;
+
+            currentLightboxGallery = srcList;
+            currentLightboxIndex = index;
+
+            document.getElementById("lightboxImg").src = currentLightboxGallery[currentLightboxIndex];
+            document.getElementById("lightboxModal").classList.add("active");
+        }
+
+        function closeLightbox() {
+            document.getElementById("lightboxModal").classList.remove("active");
+        }
+
+        function lightboxNext(e) {
+            e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxGallery.length;
+            document.getElementById("lightboxImg").src = currentLightboxGallery[currentLightboxIndex];
+        }
+
+        function lightboxPrev(e) {
+            e.stopPropagation();
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxGallery.length) % currentLightboxGallery.length;
+            document.getElementById("lightboxImg").src = currentLightboxGallery[currentLightboxIndex];
+        }
+
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById("lightboxModal");
+            if (modal.classList.contains("active")) {
+                if (e.key === "ArrowRight") lightboxNext(e);
+                else if (e.key === "ArrowLeft") lightboxPrev(e);
+                else if (e.key === "Escape") closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
