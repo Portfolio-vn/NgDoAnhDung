@@ -1159,8 +1159,18 @@
         ];
 
         const projPresentation = [
-            { type: "video", src: "assets/drone/presentation/pres1.mp4" },
-            { type: "video", src: "assets/drone/presentation/pres2.mp4" }
+            {
+                type: "drive",
+                title: "Presentation Video 1",
+                url: "https://drive.google.com/file/d/19Uz7Ufj7LHZ5qYbv9lyh8HuP6TbMKVXn/view?usp=drive_link",
+                thumbnail: "assets/drone/assembly/assembly2.jpg"
+            },
+            {
+                type: "drive",
+                title: "Presentation Video 2",
+                url: "https://drive.google.com/file/d/180xGKqZ8yv-y2taDAjbqSAyzQXHXdtGx/view?usp=drive_link",
+                thumbnail: "assets/drone/assembly/assembly3.jpg"
+            }
         ];
 
         const muadongam = [ 'assets/activities/muadongam.jpg' ];
@@ -1295,12 +1305,21 @@
         // ===== DRONE PRESENTATION VIDEOS =====
         function renderProjPresentation() {
             const media = document.getElementById("projPresentationMedia");
+            const item = projPresentation[projPresentationIndex];
             const controls = `
                 <button class="gallery-btn left" onclick="prevProjPresentation(event)">❮</button>
                 <button class="gallery-btn right" onclick="nextProjPresentation(event)">❯</button>
             `;
             media.innerHTML = controls + `
-                <video src="${projPresentation[projPresentationIndex].src}#t=0.1" style="width:100%; height:100%; object-fit:cover;" controls preload="metadata"></video>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer"
+                   style="width:100%; height:100%; display:block; position:relative; text-decoration:none; color:white;">
+                    <img src="${item.thumbnail}" alt="${item.title}"
+                         style="width:100%; height:100%; object-fit:cover;">
+                    <span style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.28); font-size:54px; font-weight:800;">▶</span>
+                    <span style="position:absolute; left:18px; bottom:16px; background:rgba(255,255,255,0.88); color:var(--text); padding:8px 14px; border-radius:999px; font-size:13px; font-weight:800;">
+                        Open Google Drive Video
+                    </span>
+                </a>
             `;
         }
         function nextProjPresentation(e) {
