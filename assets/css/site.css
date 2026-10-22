@@ -145,8 +145,14 @@ h3{font-size:1.06rem;font-weight:700;letter-spacing:-.1px}
 /* ---------- photo gallery ---------- */
 .gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:16px}
 .gal a{display:block;border-radius:8px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--panel2)}
+.gal a[hidden]{display:none}
 .gal img{width:100%;height:100%;object-fit:cover;transition:transform .4s,filter .25s}
 .gal a:hover img{transform:scale(1.08);filter:brightness(1.07)}
+.gal a.gal-more{position:relative}
+.gal a.gal-more::after{content:'';position:absolute;inset:0;background:rgba(10,15,24,.72);transition:background .25s}
+.gal a.gal-more:hover::after{background:rgba(10,15,24,.6)}
+.gal a.gal-more:hover img{transform:none;filter:none}
+.gal-more-label{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--ink);font-family:var(--mono);font-weight:600;font-size:.95rem;letter-spacing:.02em}
 .vid{width:100%;border-radius:8px;border:1px solid var(--line);background:#000;margin-top:0}
 .vidgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:16px}
 

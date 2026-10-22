@@ -78,6 +78,30 @@
   }, { passive: true });
 })();
 
+/* ---------- compact photo galleries (show first N, expand on click) ---------- */
+(function () {
+  var LIMIT = 6;
+  document.querySelectorAll('.gal:not(.docs)').forEach(function (gal) {
+    var items = [].slice.call(gal.children);
+    if (items.length <= LIMIT) return;
+    var extra = items.slice(LIMIT);
+    extra.forEach(function (el) { el.hidden = true; });
+    var tile = items[LIMIT - 1];
+    tile.classList.add('gal-more');
+    var label = document.createElement('span');
+    label.className = 'gal-more-label';
+    label.innerHTML = '<span data-en>+' + extra.length + ' more</span><span data-vi>+' + extra.length + ' ảnh</span>';
+    tile.appendChild(label);
+    tile.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      extra.forEach(function (el) { el.hidden = false; });
+      label.remove();
+      tile.classList.remove('gal-more');
+    });
+  });
+})();
+
 /* ---------- lightbox ---------- */
 (function () {
   var lb = document.getElementById('lb'), img = document.getElementById('lbi');
